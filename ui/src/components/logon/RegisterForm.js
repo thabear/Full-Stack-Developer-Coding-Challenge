@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { 
-  Button,
   Card,
   CardGroup,
   CardBody,
@@ -110,9 +109,9 @@ const RegisterForm = (props) => {
                         autoComplete="new-password"
                         valid={!formik.errors.confirmNewPassword}
                         invalid={
-                          formik.touched.confirmNewPassword &&
-                          !!formik.errors.confirmNewPassword ||
-                          (formik.values.newPassword != formik.values.confirmNewPassword)
+                          (formik.touched.confirmNewPassword &&
+                          !!formik.errors.confirmNewPassword) ||
+                          (formik.values.newPassword !== formik.values.confirmNewPassword)
                         }
                         required
                         onChange={formik.handleChange}

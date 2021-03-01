@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Col,
   Container,
@@ -11,7 +11,9 @@ import "./Dashboard.css"
 
 const Dashboard = () => {
 
+  // eslint-disable-next-line
   const [alertsData, setAlertsData] = useState([]);
+  // eslint-disable-next-line
   const [contactsData, setContactsData] = useState([]);
   console.log(alertsData);
   console.log(contactsData);
@@ -47,6 +49,7 @@ const getViewableContactData = (data) => {
   
 }
 
+// eslint-disable-next-line
 const getAlertsData = () => {
   getAlerts().then((data) => {
     return data;
@@ -54,7 +57,7 @@ const getAlertsData = () => {
     console.log(error);
   }); 
 };
-
+// eslint-disable-next-line
 const getContactsData = () => {
   getContacts().then((data) => {
     return data;

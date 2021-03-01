@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import LaddaButton, { CONTRACT } from 'react-ladda';
 import * as Yup from 'yup';
+import { register } from '../../services/userService.js';
 import 'ladda/dist/ladda-themeless.min.css';
 import './RegisterForm.css';
 
@@ -36,11 +37,14 @@ const RegisterForm = (props) => {
         .required('Password is Required')
     }),
     onSubmit: values => {
-      // if (props.location.state) {
-      //   props.authenticate(values, props.location.state.from.pathname);
-      // } else {
-      //   props.authenticate(values);
-      // }
+      register(values.newUsername, values.newPassword).then((response) => {
+        if (response.status === 201 && response.data[0].message === "account created") {
+          alert("Account Successfully Created!");
+          window.location.pathname = "/login";
+        } else {
+          alert("Account could not be created at this time");
+        }
+      })
     }
   });
 
@@ -107,7 +111,8 @@ const RegisterForm = (props) => {
                         valid={!formik.errors.confirmNewPassword}
                         invalid={
                           formik.touched.confirmNewPassword &&
-                          !!formik.errors.confirmNewPassword
+                          !!formik.errors.confirmNewPassword ||
+                          (formik.values.newPassword != formik.values.confirmNewPassword)
                         }
                         required
                         onChange={formik.handleChange}
